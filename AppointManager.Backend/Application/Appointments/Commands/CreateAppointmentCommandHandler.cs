@@ -23,7 +23,7 @@ namespace AppointManager.Backend.Application.Appointments.Commands
                 Id = Guid.NewGuid(),
                 CustomerName = request.CustomerName,
                 CompanyName = request.CompanyName,
-                Date = request.Date,
+                Date = request.Date.ToUniversalTime(),
                 Notes = request.Notes
             };
 
