@@ -2,7 +2,7 @@
 using AppointManager.Backend.Infrastructure.Persistence;
 using MediatR;
 
-namespace AppointManager.Backend.Application.Companies
+namespace AppointManager.Backend.Application.Companies.Commands
 {
     public class CreateCompanyCommandHandler : IRequestHandler<CreateCompanyCommand, Guid>
     {

@@ -1,4 +1,4 @@
-﻿using AppointManager.Backend.Application.Companies;
+﻿using AppointManager.Backend.Application.Companies.Commands;
 using AppointManager.Backend.Application.Users.CompanyAdmins.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

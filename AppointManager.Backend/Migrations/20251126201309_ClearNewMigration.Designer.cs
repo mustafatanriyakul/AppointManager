@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AppointManager.Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251125172040_FixedIdIdentity")]
-    partial class FixedIdIdentity
+    [Migration("20251126201309_ClearNewMigration")]
+    partial class ClearNewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,18 +31,11 @@ namespace AppointManager.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CompanyId")
+                    b.Property<Guid>("CompanyId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CompanyName")
+                    b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CustomerUserId")
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("Date")
@@ -52,11 +45,14 @@ namespace AppointManager.Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("CustomerUserId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Appointments");
                 });
@@ -316,13 +312,21 @@ namespace AppointManager.Backend.Migrations
 
             modelBuilder.Entity("AppointManager.Backend.Domain.Entities.Appointment", b =>
                 {
-                    b.HasOne("AppointManager.Backend.Domain.Entities.Company", null)
+                    b.HasOne("AppointManager.Backend.Domain.Entities.Company", "Company")
                         .WithMany("Appointments")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("AppointManager.Backend.Domain.Entities.Users.Customer", null)
+                    b.HasOne("AppointManager.Backend.Domain.Entities.Users.Customer", "Customer")
                         .WithMany("Appointments")
-                        .HasForeignKey("CustomerUserId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("AppointManager.Backend.Domain.Entities.Users.CompanyAdmin", b =>

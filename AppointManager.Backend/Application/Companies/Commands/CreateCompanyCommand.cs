@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AppointManager.Backend.Application.Companies
+namespace AppointManager.Backend.Application.Companies.Commands
 {
     public record CreateCompanyCommand (
             string Name,

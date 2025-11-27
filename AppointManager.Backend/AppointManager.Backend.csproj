@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Application\Users\CompanyAdmins\Queries\" />
     <Folder Include="Application\Users\Customers\Queries\" />
+    <Folder Include="Application\Users\UserQueries\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

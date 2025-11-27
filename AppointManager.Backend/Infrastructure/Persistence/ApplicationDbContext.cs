@@ -40,6 +40,19 @@ namespace AppointManager.Backend.Infrastructure.Persistence
                     .HasForeignKey<CompanyAdmin>(companyAdmin => companyAdmin.UserId);
             });
 
+            builder.Entity<Appointment>(entity =>
+            {
+                entity.HasOne(appointment => appointment.Company)
+                      .WithMany(company => company.Appointments)
+                      .HasForeignKey(appointment => appointment.CompanyId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(appointment => appointment.Customer)
+                      .WithMany(customer => customer.Appointments)
+                      .HasForeignKey(appointment => appointment.CustomerId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

@@ -1,4 +1,5 @@
 ﻿using AppointManager.Backend.Application.Users.Customers.Commands;
+using AppointManager.Backend.Application.Users.UserCommands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,22 @@ namespace AppointManager.Backend.Api.Controllers
             {
                 var userId = await _mediator.Send(command);
                 return StatusCode(201, new { UserId = userId, Message = "Customer registered successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserLoginCommand command)
+        {
+            try
+            {
+                var token = await _mediator.Send(command);
+
+                return Ok(new { token = token });
             }
             catch (Exception ex)
             {

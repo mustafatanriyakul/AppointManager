@@ -3,8 +3,7 @@
 namespace AppointManager.Backend.Application.Appointments.Commands
 {
     public record CreateAppointmentCommand(
-            string CustomerName,
-            string CompanyName,
+            Guid CompanyId,
             DateTimeOffset Date,
             string Notes
         ) : IRequest<Guid>;

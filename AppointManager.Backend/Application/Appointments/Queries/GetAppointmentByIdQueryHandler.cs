@@ -1,7 +1,7 @@
 ﻿using AppointManager.Backend.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
+/*
 namespace AppointManager.Backend.Application.Appointments.Queries
 {
     public class GetAppointmentByIdQueryHandler : IRequestHandler<GetAppointmentByIdQuery, AppointmentDto>
@@ -36,3 +36,4 @@ namespace AppointManager.Backend.Application.Appointments.Queries
         }
     }
 }
+*/
